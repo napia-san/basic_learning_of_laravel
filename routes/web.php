@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\AuthController;
 
 
 /*
@@ -19,5 +20,9 @@ use App\Http\Controllers\WelcomeController;
 //     return view('welcome');
 // });
 
+// 実験用
 Route::get('/welcome', [WelcomeController::class, 'index']);
 Route::get('/welcome/second', [WelcomeController::class, 'second']);
+
+// 実装用
+Route::get('/', [AuthController::class, 'index']);
