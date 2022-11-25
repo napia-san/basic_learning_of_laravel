@@ -31,3 +31,4 @@ Route::post('/test/input', [TestController::class, 'input']);
 // 実装用
 Route::get('/', [AuthController::class, 'index']);
 Route::get('/task/list', [TaskController::class, 'list']);
+Route::post('/login', [AuthController::class, 'login']);
