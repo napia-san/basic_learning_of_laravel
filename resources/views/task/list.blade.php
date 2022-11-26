@@ -60,7 +60,7 @@
         <br>
         <hr>
         <menu label="リンク">
-        <a href="./index.html">ログアウト(未実装)</a><br>
+        <a href="/logout">ログアウト</a><br>
         </menu>
     </body>
 @endsection
