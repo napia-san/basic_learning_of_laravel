@@ -284,5 +284,26 @@ var_dump($sql);
                      ->orderBy('period')
                      ->orderBy('created_at');
     }
+    
+    protected function getCompletedListBuilder()
+    {
+        return CompletedTaskModel::where('user_id', Auth::id())
+                     ->orderBy('priority', 'DESC')
+                     ->orderBy('period')
+                     ->orderBy('created_at');
+    }
+    
+    public function completed_list()
+    {
+        
+        // 1Page辺りの表示アイテム数を設定
+        $per_page = 20;
+
+        // 一覧の取得
+        $list = $this->getCompletedListBuilder()
+                     ->paginate($per_page);
+        //
+        return view('task.completed_list', ['list' => $list]);
+    }
 
 }
