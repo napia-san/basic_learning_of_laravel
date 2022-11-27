@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Task as TaskModel;
 use Illuminate\Http\Request;
 use App\Models\CompletedTask as CompletedTaskModel;
+use Illuminate\Support\Facades\DB;
 
 
 class TaskController extends Controller
