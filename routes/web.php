@@ -5,6 +5,7 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
@@ -33,6 +34,8 @@ Route::post('/test/input', [TestController::class, 'input']);
 // 実装用
 Route::get('/', [AuthController::class, 'index'])->name('front.index');
 Route::post('/login', [AuthController::class, 'login']);
+Route::get('/user/register', [UserController::class, 'index']);
+Route::post('/register', [UserController::class, 'register']);
 \
 // 認可処理
 Route::middleware(['auth'])->group(function () {
