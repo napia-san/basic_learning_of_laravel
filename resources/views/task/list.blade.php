@@ -1,24 +1,30 @@
 @extends('layout')
 
-{{-- title --}}
+{{-- タイトル --}}
 @section('title')(詳細画面)@endsection
 
-{{-- main contents--}}
+{{-- メインコンテンツ --}}
 @section('contets')
         <h1>タスクの登録</h1>
-        @if (session('front.task_register_success') == true)
+            @if (session('front.task_register_success') == true)
                 タスクを登録しました！！<br>
-        @endif
-        @if (session('front.task_delete_success') == true)
+            @endif
+            @if (session('front.task_delete_success') == true)
                 タスクを削除しました！！<br>
-        @endif
-        @if ($errors->any())
-            <div>
-            @foreach ($errors->all() as $error)
-                {{ $error }}<br>
-            @endforeach
-            </div>
-        @endif
+            @endif
+            @if (session('front.task_completed_success') == true)
+                タスクを完了にしました！！<br>
+            @endif
+            @if (session('front.task_completed_failure') == true)
+                タスクの完了に失敗しました....<br>
+            @endif
+            @if ($errors->any())
+                <div>
+                @foreach ($errors->all() as $error)
+                    {{ $error }}<br>
+                @endforeach
+                </div>
+            @endif
             <form action="/task/register" method="post">
                 @csrf
                 タスク名:<input name="name" value="{{ old('name') }}"><br>
@@ -37,7 +43,7 @@
             <th>タスク名
             <th>期限
             <th>重要度
-        @foreach ($list as $task)
+@foreach ($list as $task)
         <tr>
             <td>{{ $task->name }}
             <td>{{ $task->period }}
@@ -45,15 +51,15 @@
             <td><a href="{{ route('detail', ['task_id' => $task->id]) }}">詳細閲覧</a>
             <td><a href="{{ route('edit', ['task_id' => $task->id]) }}">編集</a>
             <td><form action="{{ route('complete', ['task_id' => $task->id]) }}" method="post"> @csrf <button onclick='return confirm("このタスクを「完了」にします。よろしいですか？");' >完了</button></form>
-        @endforeach
+@endforeach
         </table>
         <!-- ページネーション -->
         {{-- {{ $list->links() }} --}}
         現在 {{ $list->currentPage() }} ページ目<br>
         @if ($list->onFirstPage() === false)
-        <a href="/task/list">最初のページ</a>
+            <a href="/task/list">最初のページ</a>
         @else
-        最初のページ
+            最初のページ
         @endif
         /
         @if ($list->previousPageUrl() !== null)
@@ -72,5 +78,4 @@
         <menu label="リンク">
         <a href="/logout">ログアウト</a><br>
         </menu>
-    </body>
 @endsection
